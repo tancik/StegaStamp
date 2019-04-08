@@ -96,7 +96,7 @@ def main():
 
         mask_im = cv2.resize(np.float32(out_vis_image), (1920,1080))
 
-        _, contours, _ = cv2.findContours(cv2.cvtColor(mask_im, cv2.COLOR_BGR2GRAY).astype(np.uint8),1,2)
+        contours, _ = cv2.findContours(cv2.cvtColor(mask_im, cv2.COLOR_BGR2GRAY).astype(np.uint8),1,2)
         extrema = np.zeros((8,2))
         corners = np.zeros((4,2))
         for cnt in contours:

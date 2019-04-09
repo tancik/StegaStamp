@@ -52,7 +52,8 @@ def main():
     if len(args.secret) > 7:
         print('Error: Can only encode 56bits (7 characters) with ECC')
         return
-    data = bytearray(args.secret, 'utf-8')
+
+    data = bytearray(args.secret + ' '*(7-len(args.secret)), 'utf-8')
     ecc = bch.encode(data)
     packet = data + ecc
 
@@ -83,13 +84,10 @@ def main():
             save_name = filename.split('/')[-1].split('.')[0]
 
             im = Image.fromarray(np.array(rescaled))
-            im.save(args.save_dir + '/hidden_'+save_name+'.png')
-
-            im = Image.fromarray(np.squeeze(np.array(raw_img)))
-            im.save(args.save_dir + '/original_'+save_name+'.png')
+            im.save(args.save_dir + '/'+save_name+'_hidden.png')
 
             im = Image.fromarray(np.squeeze(np.array(residual)))
-            im.save(args.save_dir + '/residual_'+save_name+'.png')
+            im.save(args.save_dir + '/'+save_name+'_residual.png')
 
 if __name__ == "__main__":
     main()

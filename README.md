@@ -3,7 +3,7 @@
 **[Matthew Tancik](https://www.matthewtancik.com), [Ben Mildenhall](http://people.eecs.berkeley.edu/~bmild/), [Ren Ng](https://scholar.google.com/citations?hl=en&user=6H0mhLUAAAAJ)**
 *University of California, Berkeley*
 
-![](https://github.com/tancik/StegaStamp/blob/master/doc/teaser.jpg)
+![](https://github.com/tancik/StegaStamp/blob/master/docs/teaser.png)
 
 
 ## Introduction

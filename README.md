@@ -1,5 +1,25 @@
 ## StegaStamp: Invisible Hyperlinks in Physical Photographs [[Project Page]](http://www.matthewtancik.com/stegastamp)
 
+**[Matthew Tancik](https://www.matthewtancik.com), [Ben Mildenhall](http://people.eecs.berkeley.edu/~bmild/), [Ren Ng](https://scholar.google.com/citations?hl=en&user=6H0mhLUAAAAJ)**
+*University of California, Berkeley*
+
+![](https://github.com/tancik/StegaStamp/blob/master/doc/teaser.jpg)
+
+
+## Introduction
+This repository is a code release for the ArXiv report found [here](https://arxiv.org/abs/1904.05343). The project explores hiding data in images while maintaining perceptual similarity. Our contribution is the ability to extract the data after the encoded image (StegaStamp) has been printed and photographed with a camera (these steps introduce image corruptions). This repository contains the code and pretrained models to replicate the results shown in the paper. Additionally, the repository contains the code necessary to train the encoder and decoder models.
+
+## Citation
+If you find our work useful, please consider citing:
+```
+    @article{2019stegastamp,
+        title={StegaStamp: Invisible Hyperlinks in Physical Photographs},
+        author={Tancik, Matthew and Mildenhall, Ben and Ng, Ren},
+        journal={arXiv preprint arXiv:1904.05343},
+        year={2019}
+    }
+```
+
 ## Installation
 - Clone repo and install submodules
 ```bash=

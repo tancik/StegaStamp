@@ -13,6 +13,7 @@ parser.add_argument('--decoder_model', type=str, required=True)
 parser.add_argument('--video', type=str, required=True)
 parser.add_argument('--secret_size', type=int, default=100)
 parser.add_argument('--save_video', type=str, default=None)
+parser.add_argument('--visualize_detector', action='store_true', help='Visualize detector mask output')
 args = parser.parse_args()
 
 BCH_POLYNOMIAL = 137
@@ -73,10 +74,12 @@ def main():
     cap = cv2.VideoCapture(args.video)
     bch = bchlib.BCH(BCH_POLYNOMIAL, BCH_BITS)
 
+    ret, frame = cap.read()
+    f_height, f_width = frame.shape[0:2]
+
     if args.save_video is not None:
-        ret, frame = cap.read()
         fourcc1 = cv2.VideoWriter_fourcc(*'XVID')
-        out = cv2.VideoWriter(args.save_video, fourcc1, 30.0, (1920, 1080))
+        out = cv2.VideoWriter(args.save_video, fourcc1, 30.0, (f_width, f_height))
 
     while(True):
         ret, frame = cap.read()
@@ -94,7 +97,9 @@ def main():
         color_codes = np.array([[255,255,255],[0,0,0]])
         out_vis_image = color_codes[output_image.astype(int)]
 
-        mask_im = cv2.resize(np.float32(out_vis_image), (1920,1080))
+        mask_im = cv2.resize(np.float32(out_vis_image), (f_width,f_height))
+        if args.visualize_detector:
+            mask_vis = mask_im.astype(np.uint8)
 
         contours, _ = cv2.findContours(cv2.cvtColor(mask_im, cv2.COLOR_BGR2GRAY).astype(np.uint8),1,2)
         extrema = np.zeros((8,2))
@@ -107,6 +112,9 @@ def main():
             hull = cv2.convexHull(cnt)
             if len(hull) < 4:
                 continue
+
+            if args.visualize_detector:
+                cv2.polylines(mask_vis, np.int32([corners]), thickness=6, color=(100,100,250), isClosed=True)
 
             extrema[0,:] = hull[np.argmax(hull[:,0,0]),0,:]
             extrema[1,:] = hull[np.argmax(hull[:,0,0]+hull[:,0,1]),0,:]
@@ -175,6 +183,8 @@ def main():
             out.write(frame)
         else:
             cv2.imshow('frame',frame)
+            if args.visualize_detector:
+                cv2.imshow('detector_mask', mask_vis)
             cv2.waitKey(1)
 
     cap.release()

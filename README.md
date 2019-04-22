@@ -27,6 +27,7 @@ git clone --recurse-submodules https://github.com/tancik/StegaStamp.git
 cd StegaStamp
 ```
 - Install tensorflow (tested with tf 1.13)
+- Python 3 required
 - Download dependencies
 ```bash=
 pip install -r requirements.txt
@@ -95,7 +96,7 @@ python decode_image.py \
 ## Detecting and Decoding
 The script `detector.py` can be used to detect and decode StegaStamps in an image. This is useful in cases where there are multiple StegaStamps are present or the StegaStamp does not fill the frame of the image.
 
-To use the detector, make sure to download the detector model as described in the installation section.
+To use the detector, make sure to download the detector model as described in the installation section. The recomended input video resolution is 1920x1080.
 
 ```bash=
 python detector.py \
@@ -104,3 +105,5 @@ python detector.py \
   --video test_vid.mp4
 ```
 Add the `--save_video FILENAME` flag to save out the results.
+
+The `--visualize_detector` flag can be used to visualize the output of the detector network. The mask corresponds to the segmentation mask, the colored polygons are fit to this segmentation mask using a set of heuristics. The detector outputs can noisy and are sensitive to size of the stegastamp. Further optimization of the detection network is not explored in this paper.

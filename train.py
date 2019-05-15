@@ -205,13 +205,18 @@ def main():
                 writer.add_summary(summary, global_step)
 
             if global_step % 10000 ==0:
-            # if global_step % 70 == 0:
                 save_path = saver.save(sess, join(CHECKPOINTS_PATH,EXP_NAME,EXP_NAME+".chkp"), global_step=global_step)
 
-    tf.saved_model.simple_save(sess,
-                               SAVED_MODELS + '/' + EXP_NAME,
-                               inputs={'secret':secret_pl, 'image':image_pl},
-                               outputs={'stegastamp':deploy_hide_image_op, 'residual':residual_op, 'decoded':deploy_decoder_op})
+    constant_graph_def = tf.graph_util.convert_variables_to_constants(
+            sess,
+            sess.graph.as_graph_def(),
+            [deploy_hide_image_op.name[:-2], residual_op.name[:-2], deploy_decoder_op.name[:-2]])
+    with tf.Session(graph=tf.Graph()) as session:
+        tf.import_graph_def(constant_graph_def, name='')
+        tf.saved_model.simple_save(session,
+                                   SAVED_MODELS + '/' + EXP_NAME,
+                                   inputs={'secret':secret_pl, 'image':image_pl},
+                                   outputs={'stegastamp':deploy_hide_image_op, 'residual':residual_op, 'decoded':deploy_decoder_op})
 
     writer.close()
 

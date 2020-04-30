@@ -1,5 +1,6 @@
 ## StegaStamp: Invisible Hyperlinks in Physical Photographs [[Project Page]](http://www.matthewtancik.com/stegastamp)
 
+### CVPR 2020
 **[Matthew Tancik](https://www.matthewtancik.com), [Ben Mildenhall](http://people.eecs.berkeley.edu/~bmild/), [Ren Ng](https://scholar.google.com/citations?hl=en&user=6H0mhLUAAAAJ)**
 *University of California, Berkeley*
 
@@ -12,11 +13,11 @@ This repository is a code release for the ArXiv report found [here](https://arxi
 ## Citation
 If you find our work useful, please consider citing:
 ```
-    @article{2019stegastamp,
+    @inproceedings{2019stegastamp,
         title={StegaStamp: Invisible Hyperlinks in Physical Photographs},
         author={Tancik, Matthew and Mildenhall, Ben and Ng, Ren},
-        journal={arXiv preprint arXiv:1904.05343},
-        year={2019}
+        booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2020}
     }
 ```
 

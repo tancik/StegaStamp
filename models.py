@@ -173,8 +173,8 @@ def transform_net(encoded_image, args, global_step):
 
 def get_secret_acc(secret_true,secret_pred):
     with tf.variable_scope("acc"):
-        secret_pred = tf.round(secret_pred)
-        correct_pred = tf.count_nonzero(secret_pred - secret_true, axis=1)
+        secret_pred = tf.round(tf.sigmoid(secret_pred))
+        correct_pred = tf.to_int64(tf.shape(secret_pred)[1]) - tf.count_nonzero(secret_pred - secret_true, axis=1)
 
         str_acc = 1.0 - tf.count_nonzero(correct_pred - tf.to_int64(tf.shape(secret_pred)[1])) / tf.size(correct_pred, out_type=tf.int64)
 

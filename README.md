@@ -17,7 +17,7 @@ If you find our work useful, please consider citing:
         title={StegaStamp: Invisible Hyperlinks in Physical Photographs},
         author={Tancik, Matthew and Mildenhall, Ben and Ng, Ren},
         booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year={2020}
+        year={2020}
     }
 ```
 

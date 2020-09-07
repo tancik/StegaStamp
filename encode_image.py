@@ -19,7 +19,6 @@ def main():
     parser.add_argument('--images_dir', type=str, default=None)
     parser.add_argument('--save_dir', type=str, default=None)
     parser.add_argument('--secret', type=str, default='Stega!!')
-    parser.add_argument('--secret_size', type=int, default=100)
     args = parser.parse_args()
 
     if args.image is not None:
